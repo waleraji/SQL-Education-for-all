@@ -1,0 +1,66 @@
+-- To view the content of both datasets individually
+
+SELECT *
+FROM donation_data
+SELECT *
+FROM donor_data
+-- Solutions
+A How much is the total donation?
+SELECT SUM (donation)
+FROM donation_data
+
+B. What is the total donation by gender?
+SELECT Gender, sum (donation)
+from donation_data
+Group by gender
+
+c. Show the total donation and number of donations by gender
+Select Gender, sum(donation), Count (donation)
+From donation_data
+Group by gender
+
+D. Total donation made by frequency of donation?
+select donation, sum(donation), count(donation)as frquency_of_donation
+from donation_data
+group by donation
+
+
+E. Total donation and number of donations by job field?
+ select sum(donation)as Total_donation, Count(job_field) as Num_of_donation_by_job_field
+from donation_data;
+
+
+F. Total donation and number of donations above 200
+select sum(donation) as total_donation, count(donation)as number_of_donation
+from donation_data
+group by donation
+having sum(donation)>200
+
+G. Total donation and number of donations below 200
+select sum(donation) as total_donation, count(donation)as number_of_donation
+from donation_data
+group by donation
+having sum(donation)<200
+
+H. which top 10 states contributes the highest
+Select Max(donation)as highest_donation, state
+from donation_data
+Group by state
+LIMIT 10
+
+I.  which top 10 states contributes the least donation
+Select Min(donation)as least_donation, state
+from donation_data
+Group by state
+LIMIT 10
+
+
+
+J. What are the top 10 cars driven by the highest donors?
+Select Max(donation)as highest_donor, car as cars_driven
+from donation_data
+join donor_data
+on donation_data.id = donor_data.id
+group by car
+limit 10
+
